@@ -14,10 +14,17 @@ let state = {
 let expanded_word = -1
 
 tag app
+	def mount
+		log stripVowels 'קֹרֵא‎'
+
+	def stripVowels rawString
+		return rawString.replace(/[\u0591-\u05C7]/g,"")
+
+
 	# Compute a search relevance score for an item.
 	def scoreSearch item, query
-		let thename = item.toLowerCase()
-		query = query.toLowerCase!
+		let thename = stripVowels(item.toLowerCase())
+		query = stripVowels(query.toLowerCase!)
 		let score = 0
 		let p = 0 # Position within the `item`
 		# Look through each character of the query string, stopping at the end(s)...
@@ -61,9 +68,11 @@ tag app
 
 	<self>
 		<header>
-			<svg[w:200px h:auto] src='./logo.svg'>
-			<input[w:100% d:block p:8px 16px m:8px 0 fs:1.5em] bind=state.search>
+			# <svg[w:200px h:auto] src='./logo.svg'>
+			<h1[fs:1.2em]> "Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
+			<input[w:100% d:block p:8px 16px m:8px 0 fs:1.5em] bind=state.search placeholder="Search">
 		<main>
+			<p> 'Results:'
 			for word, index in search! when index < 64
 				<div.definition .expanded=(expanded_word == index) tabIndex=0>
 					<p @click=expand(index)>
@@ -72,7 +81,7 @@ tag app
 							<title> 'expand'
 							<polygon points="4,3 1,0 0,1 4,5 8,1 7,0">
 
-					<div[fs:1.2em p:8px] innerHTML=word.definition>
+					<div[fs:1.2em p:16px 0px] innerHTML=word.definition>
 
 	css
 		d:flex
@@ -84,13 +93,13 @@ tag app
 			m:auto
 
 		.definition
-			max-height:62px
+			max-height:54px
 			of:hidden
 			pos:relative
 
 			p
 				m:0
-				p:16px
+				p:12px
 				fs:24px
 				d:flex
 				jc:space-between
@@ -99,7 +108,7 @@ tag app
 				pos:sticky
 				t:0px
 				bg:white
-				bdb:1px solid gray4
+				bdb:1px solid cooler2
 			
 			svg
 				transform:$svg-transform
