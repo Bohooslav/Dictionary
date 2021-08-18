@@ -15,16 +15,22 @@ let expanded_word = -1
 
 tag app
 	def mount
-		log stripVowels 'קֹרֵא‎'
+		log stripVowels 'יִשָּׁפֵךְ‎'
+		log stripVowels 'יִשָּׁפֵך'
 
 	def stripVowels rawString
-		return rawString.replace(/[\u0591-\u05C7]/g,"")
+		let res =  rawString.replace(/[\u0591-\u05C7]/g,"")
+		# Replace some letters, which are not present in a given unicode range, manually.
+		res = res.replace('שׁ', 'ש')
+		res = res.replace('‎', '')
+		return res
 
 
 	# Compute a search relevance score for an item.
 	def scoreSearch item, query
-		let thename = stripVowels(item.toLowerCase())
+		let thename = stripVowels(item.toLowerCase!)
 		query = stripVowels(query.toLowerCase!)
+		# console.log thename, query
 		let score = 0
 		let p = 0 # Position within the `item`
 		# Look through each character of the query string, stopping at the end(s)...
@@ -42,10 +48,17 @@ tag app
 			#  ... and skip the position within `item` forward.
 			p = index
 
-		if thename.indexOf(query) > -1 or query.indexOf(thename) > -1
-			score += 12
+		if thename.indexOf(query) > -1
+			score += 8
+		if thename.indexOf(query) > -1 and thename.length - query.length < 2
+			score += 8
+		if thename.length == query.length
+			score += 1
+
 		# log score
-		return score
+		if score > query.length
+			return score
+		return 0
 
 
 	def search
@@ -53,7 +66,7 @@ tag app
 			found_words = []
 			for word in dictionary
 				word.score = scoreSearch(word.lexeme, state.search)
-				if word.score > state.search.length * 0.75
+				if word.score
 					found_words.push(word)
 			return found_words.sort(do |a, b| b.score - a.score)
 		else
