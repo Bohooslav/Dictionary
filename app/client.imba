@@ -194,6 +194,13 @@ tag app
 		d:flex
 		fld:column
 
+		$bg:black
+		$c:white
+		bg:$bg
+		c:$c
+		p:8px
+		min-height:100vh
+
 	css
 		main, header
 			max-width:1024px
@@ -227,39 +234,4 @@ tag app
 
 
 
-tag strong-definition
-	definition
-
-	def routed params
-		log params
-
-		for word in dictionary
-			if word.topic == params.topic
-				definition = word
-				break
-
-
-	def render
-		<self>
-			<p> definition.lexeme + ' · ' + definition.pronunciation + ' · ' + definition.transliteration + ' · ' + definition.short_definition
-			<div[fs:1.2em p:16px 0px bg:$bg] innerHTML=definition.definition>
-
-
-
-tag root
-	def render
-		<self>
-			<app route="/$">
-			<strong-definition route="/strong/:topic">
-	
-	css
-		$bg:black
-		$c:white
-		bg:$bg
-		c:$c
-		p:8px
-		min-height:100vh
-
-
-
-imba.mount <root>
+imba.mount <app>
