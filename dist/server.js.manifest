@@ -54,7 +54,7 @@
   "path": "node_modules/imba/src/imba/bindings.node.imba"
 },
 "$$8$$":{
-  "bytes": 8071,
+  "bytes": 8460,
   "imports": [],
   "_": "input",
   "path": "node_modules/imba/src/imba/dom/flags.imba"
@@ -66,7 +66,7 @@
   "path": "node_modules/imba/src/imba/dom/context.imba"
 },
 "$$10$$":{
-  "bytes": 96671,
+  "bytes": 97079,
   "imports": [
     "$$6$$",
     "$$7$$",
@@ -79,7 +79,7 @@
   "path": "node_modules/imba/src/imba/dom/core.imba"
 },
 "$$11$$":{
-  "bytes": 24499,
+  "bytes": 24723,
   "imports": [
     "$$10$$",
     "$$8$$"
@@ -135,7 +135,7 @@
   "path": "node_modules/imba/src/imba/dom/mount.imba"
 },
 "$$17$$":{
-  "bytes": 28945,
+  "bytes": 29250,
   "imports": [
     "$$10$$",
     "$$1$$"
@@ -207,7 +207,7 @@
   "path": "node_modules/imba/src/imba/events/pointer.imba"
 },
 "$$25$$":{
-  "bytes": 64660,
+  "bytes": 64972,
   "imports": [
     "$$10$$",
     "$$0$$",
@@ -226,7 +226,7 @@
   "path": "node_modules/imba/src/imba/events/intersect.imba"
 },
 "$$27$$":{
-  "bytes": 7459,
+  "bytes": 8228,
   "imports": [
     "$$10$$",
     "$$23$$"
@@ -243,7 +243,7 @@
   "path": "node_modules/imba/src/imba/events/selection.imba"
 },
 "$$29$$":{
-  "bytes": 8240,
+  "bytes": 7572,
   "imports": [],
   "_": "input",
   "path": "node_modules/imba/src/imba/events/hotkey.shared.imba"
@@ -378,7 +378,7 @@
   "public": true,
   "path": "public/__assets__/all.css",
   "asset": "$$42$$",
-  "hash": "P9W0FHTR",
+  "hash": "8XQCVAGI",
   "originalPath": "all.__dist__.css",
   "url": "/__assets__/all.css"
 },
@@ -470,7 +470,7 @@
   "imports": [],
   "exports": [],
   "inputs": [],
-  "bytes": 118019,
+  "bytes": 119771,
   "source": "$$51$$",
   "_": "output",
   "path": "public/__assets__/app/client.js.map",
@@ -478,7 +478,7 @@
   "url": "/__assets__/app/client.js.map",
   "type": "map",
   "dependencies": [],
-  "hash": "MZDB3E0X"
+  "hash": "FQKMKMHF"
 },
 "$$46$$":{
   "imports": [],
@@ -495,7 +495,7 @@
     ],
     [
       "$$54$$",
-      1242
+      1305
     ],
     [
       "$$55$$",
@@ -503,11 +503,11 @@
     ],
     [
       "$$56$$",
-      7962
+      8076
     ],
     [
       "$$57$$",
-      3742
+      3804
     ],
     [
       "$$58$$",
@@ -515,7 +515,7 @@
     ],
     [
       "$$59$$",
-      4287
+      4289
     ],
     [
       "$$60$$",
@@ -523,7 +523,7 @@
     ],
     [
       "$$61$$",
-      4244
+      4260
     ],
     [
       "$$62$$",
@@ -559,10 +559,10 @@
     ],
     [
       "$$51$$",
-      6020
+      6618
     ]
   ],
-  "bytes": 44698042,
+  "bytes": 44698897,
   "map": "$$45$$",
   "source": "$$51$$",
   "css": "$$47$$",
@@ -572,7 +572,7 @@
   "url": "/__assets__/app/client.js",
   "type": "js",
   "dependencies": [],
-  "hash": "MZDB3E0X",
+  "hash": "FQKMKMHF",
   "originalPath": "app/client.__dist__.js"
 },
 "$$47$$":{
@@ -580,10 +580,10 @@
   "inputs": [
     [
       "$$69$$",
-      2427
+      2583
     ]
   ],
-  "bytes": 2428,
+  "bytes": 2584,
   "source": "$$51$$",
   "_": "output",
   "path": "public/__assets__/app/client.css",
@@ -591,7 +591,7 @@
   "url": "/__assets__/app/client.css",
   "type": "css",
   "dependencies": [],
-  "hash": "TWZLH6EK",
+  "hash": "1XMBI1EI",
   "originalPath": "app/client.__dist__.css"
 },
 "$$48$$":{
@@ -618,7 +618,7 @@
   "js": "$$44$$"
 },
 "$$51$$":{
-  "bytes": 27579,
+  "bytes": 31006,
   "imports": [
     "$$66$$",
     "$$67$$",
@@ -644,7 +644,7 @@
   "path": "node_modules/imba/src/imba/scheduler.imba"
 },
 "$$54$$":{
-  "bytes": 8071,
+  "bytes": 8460,
   "imports": [],
   "_": "input",
   "path": "node_modules/imba/src/imba/dom/flags.imba"
@@ -656,7 +656,7 @@
   "path": "node_modules/imba/src/imba/dom/context.imba"
 },
 "$$56$$":{
-  "bytes": 61103,
+  "bytes": 61515,
   "imports": [
     "$$54$$",
     "$$52$$",
@@ -666,7 +666,7 @@
   "path": "node_modules/imba/src/imba/dom/core.web.imba"
 },
 "$$57$$":{
-  "bytes": 24499,
+  "bytes": 24723,
   "imports": [
     "$$56$$",
     "$$54$$"
@@ -705,7 +705,7 @@
   "path": "node_modules/imba/src/imba/dom/mount.imba"
 },
 "$$61$$":{
-  "bytes": 28945,
+  "bytes": 29250,
   "imports": [
     "$$56$$",
     "$$53$$"
@@ -770,7 +770,7 @@
   "path": "app/rus.json"
 },
 "$$69$$":{
-  "bytes": 2686,
+  "bytes": 2860,
   "imports": [],
   "_": "input",
   "path": "styles:app/client.imba"
@@ -867,7 +867,7 @@
   "path": "node_modules/imba/src/imba/events/pointer.imba"
 },
 "$$78$$":{
-  "bytes": 64659,
+  "bytes": 64971,
   "imports": [
     "$$56$$",
     "$$52$$",
@@ -886,7 +886,7 @@
   "path": "node_modules/imba/src/imba/events/intersect.imba"
 },
 "$$80$$":{
-  "bytes": 7459,
+  "bytes": 8228,
   "imports": [
     "$$56$$",
     "$$84$$"
@@ -903,7 +903,7 @@
   "path": "node_modules/imba/src/imba/events/selection.imba"
 },
 "$$82$$":{
-  "bytes": 22821,
+  "bytes": 22359,
   "imports": [
     "$$56$$",
     "$$85$$",
@@ -935,7 +935,7 @@
   "path": "node_modules/imba/src/imba/events/helpers.imba"
 },
 "$$85$$":{
-  "bytes": 8510,
+  "bytes": 7842,
   "imports": [],
   "_": "input",
   "path": "node_modules/imba/src/imba/events/hotkey.shared.imba"
@@ -1048,7 +1048,7 @@
     "/__assets__/all.css": "$$42$$"
   },
   "mappings": {},
-  "hash": "UMWBFP6G",
+  "hash": "HOHZKEHF",
   "srcdir": "..",
   "outdir": ".",
   "path": "server.js.manifest",
