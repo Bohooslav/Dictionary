@@ -11,4 +11,4 @@ app.get(/.*/) do(req,res)
 
 	res.send index.body
 
-imba.serve app.listen(process.env.PORT or 3000)
+imba.serve app.listen(process.env.PORT or 3000, '0.0.0.0')

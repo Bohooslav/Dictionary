@@ -33,10 +33,15 @@ let dictionary = eng
 
 global css
 	html, body
+		$bg:black
+		$c:white
+		$accent-color: #ffc107
 		m:0
 		p:0
 		ff:sans
-		fs:18px
+		fs:16px
+		bg:$bg
+		c:$c
 
 	*
 		tween:all 300ms ease
@@ -48,6 +53,13 @@ global css
 		cursor:pointer
 
 
+	input
+		-webkit-appearance: none
+		-moz-appearance: none
+		appearance: none
+
+	*:focus 
+		outline: none
 
 
 let state = {
@@ -91,10 +103,10 @@ tag app
 			imba.commit!
 			return undefined
 
-		document.onfocus = do
-			if document.getSelection().toString().length == 0
-				$search.focus!
-		$search.focus!
+		# document.onfocus = do
+		# 	if document.getSelection().toString().length == 0
+		# 		$search.focus!
+		# $search.focus!
 
 		
 		# log stripVowels 'יִשָּׁפֵךְ‎'
@@ -179,28 +191,26 @@ tag app
 			expanded_word = -1
 		else
 			expanded_word = index
-			setTimeout(&, 300) do
+			setTimeout(&, 400) do
 				const definition_body = document.getElementById(id)
-				definition_body.scrollIntoView({behavior:'smooth', block:"center"})
 
-				if window.innerHeight > 640
+				if window.innerHeight > definition_body.scrollHeight + 100
 					definition_body.scrollIntoView({behavior:'smooth', block:"center"})
 				else
-					definition_body.scrollIntoView({behavior:'smooth', block:"start"})
+					window.scrollTo({ behavior: 'smooth', top: definition_body.offsetTop - 50, left: 0 })
 
 
 	<self>
-		<header>
+		<main>
 			<select[bg:cooler8 p:12px font:inherit w:100% c:inherit border:none fw:bold cursor:pointer] bind=state.dictionary_lang>
 				<option value="eng"> "Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
 				<option value="rus"> "Полный лексикон по Стронгу и Дворецкому, 2019"
-			<div[d:flex ai:center pos:relative]>
-				<input$search[w:100% d:block p:8px 36px 8px 8px m:8px 0 fs:1.5em bg:$bg c:$c border:1px solid cooler8] bind=state.search placeholder="Search">
+			<div[pos:sticky top:1px zi:999]>
+				<input$search bind=state.search placeholder="Search" @input=window.scrollTo(0,0)>
 				<svg[fill:$c w:36px h:100% p:12px 0 12px 8px cursor:pointer pos:absolute r:8px t:0] @click=(state.search = '', $search.focus()) viewBox="0 0 20 20">
 					<title> 'Clear'
 					<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z">
 
-		<main>
 			<p> 'Results:'
 			for word, index in search! when index < 64
 				<div.definition .expanded=(expanded_word == index)>
@@ -215,23 +225,29 @@ tag app
 						<div[fs:1.2em p:16px 0px @off:0 h:auto @off:0px overflow:hidden bg:$bg o@off:0] innerHTML=word.definition id=word.lexeme ease>
 
 	css
-		d:flex
-		fld:column
-		$bg:black
-		$c:white
-		bg:$bg
-		c:$c
 		p:8px
 		min-height:100vh
 
 	css
-		main, header
+		main
 			max-width:1024px
 			w:100%
 			m:8px auto 0
-		
-		main
 			pb:128px
+
+		input
+			w:100%
+			d:block
+			p:8px 36px 8px 8px
+			m:8px 0
+			fs:1.5em
+			bg:$bg
+			c:$c
+			border:1px solid cooler8
+			shadow@focus: 0 0 256px 1px $accent-color, 0 0 0px 1px $accent-color, 0 0 128px 2px $accent-color
+			rd@focus:8px
+
+			
 
 		.definition
 			overflow:hidden
