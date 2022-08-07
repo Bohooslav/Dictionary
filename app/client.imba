@@ -1,14 +1,46 @@
 import eng from './bdbt.json'
 import rus from './rus.json'
+import books_map from './books_map.json'
 
-def parseDefinitionsLinks definitions
+def parseDefinitionsLinks definitions, translation
+	for definition in definitions
+		# Clean up unneeded spans
+		definition.definition = definition.definition.replace('(<[/]?span[^>]*)>', '')
+		# Avoid unneded classes on anchors
+		definition.definition = definition.definition.replace('( class=\'\w+\')', '')
+	
+	for definition in definitions
+		let pieces = definition.definition.split("'")
+
+		let result = ''
+		for piece, index in pieces
+			if piece.startsWith('B:')
+				result += "'https://bolls.life/" + translation + '/'
+				let digits = piece.match(/\d+/g)
+				try
+					result += books_map[(digits[0])] + '/' + digits[1] + '/' + digits[2]
+				catch e
+					console.log(piece, e)
+
+				if digits.length > 3
+					result += '-' + digits[3]
+				unless digits.length > 1
+					console.log(digits)
+				result += "' target='_blank'"
+			else
+				if index
+					result += "'{piece}"
+				else
+					result += piece
+			definition.definition = result
+
 	# Parse Strong links
 	let patterns = [
 		/<a href='S:(.*?)'>/g,
 		/<a href=\"S:(.*?)\">/g,
 		/<a href=S:(.*?)>/g
 	]
-	for definition, index in definitions
+	for definition in definitions
 		for pattern in patterns
 			let matches = [... definition.definition.matchAll(pattern)]
 			for match in matches
@@ -20,14 +52,14 @@ def parseDefinitionsLinks definitions
 		/<a class="T" href=\"S:(.*?)\">/g,
 		/<a class="T" href=S:(.*?)>/g
 	]
-	for definition, index in definitions
+	for definition in definitions
 		for pattern in patterns
 			let matches = [... definition.definition.matchAll(pattern)]
 			for match in matches
 				definition.definition = definition.definition.replace(match[0], match[1])
 
-parseDefinitionsLinks(eng)
-parseDefinitionsLinks(rus)
+parseDefinitionsLinks(eng, 'YLT')
+parseDefinitionsLinks(rus, 'SYNOD')
 
 let dictionary = eng
 
@@ -79,10 +111,11 @@ let state = {
 			dictionary = eng
 			document.title = "Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
 		imba.commit!
-
 }
 
+let definitions_history = []
 
+let definitions_history_index = -1
 
 let expanded_word = -1
 
@@ -199,23 +232,60 @@ tag app
 				else
 					window.scrollTo({ behavior: 'smooth', top: definition_body.offsetTop - 50, left: 0 })
 
+	def prevDefinition
+		if definitions_history_index > 0
+			definitions_history_index -= 1
+			state.search = definitions_history[definitions_history_index]
+
+	def nextDefinition
+		if definitions_history_index < definitions_history.length - 1
+			definitions_history_index += 1
+			state.search = definitions_history[definitions_history_index]
+		
+	def eve
+		window.scrollTo({ behavior: 'smooth', top: 0, left: 0 })
+
+		definitions_history_index += 1
+		definitions_history[definitions_history_index] = state.search
+		definitions_history.length = definitions_history_index + 1
+
 
 	<self>
 		<main>
 			<select[bg:cooler8 p:12px font:inherit w:100% c:inherit border:none fw:bold cursor:pointer] bind=state.dictionary_lang>
 				<option value="eng"> "Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
 				<option value="rus"> "Полный лексикон по Стронгу и Дворецкому, 2019"
-			<div[pos:sticky top:1px zi:999]>
-				<input$search bind=state.search placeholder="Search" @input=window.scrollTo(0,0)>
-				<svg[fill:$c w:36px h:100% p:12px 0 12px 8px cursor:pointer pos:absolute r:8px t:0] @click=(state.search = '', $search.focus()) viewBox="0 0 20 20">
-					<title> 'Clear'
-					<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z">
+			<header>
+				<button @click=prevDefinition() .disabled=(definitions_history_index == 0 or definitions_history.length == 0) title='Back'>
+					<svg [t:0 l:0 transform: rotate(90deg)] width="16" height="10" viewBox="0 0 8 5">
+						<title> 'Back'
+						<polygon points="4,3 1,0 0,1 4,5 8,1 7,0">
+				<button [l:32px t:0] @click=nextDefinition() .disabled=(definitions_history.length - 1 == definitions_history_index) title='Next'>
+					<svg [transform: rotate(-90deg)] width="16" height="10" viewBox="0 0 8 5">
+						<title> 'Next'
+						<polygon points="4,3 1,0 0,1 4,5 8,1 7,0">
+
+				<input$search bind=state.search placeholder="Search" @input.debounce(300ms)=eve>
+
+				<button [r:8px t:0] title='Clear' @click=(state.search = '', $search.focus())>
+					<svg[w:36px p:12px 0 12px 8px] viewBox="0 0 20 20">
+						<title> 'Clear'
+						<path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z">
 
 			<p> 'Results:'
-			for word, index in search! when index < 64
+			for word, index in search! when index < 128
 				<div.definition .expanded=(expanded_word == index)>
 					<p @click=expand(index, word.lexeme)>
-						word.lexeme + ' · ' + word.pronunciation + ' · ' + word.transliteration + ' · ' + word.short_definition
+						<span>
+							<b> word.lexeme
+							' · '
+							word.pronunciation
+							' · '
+							word.transliteration
+							' · '
+							<b> word.short_definition
+							' · '
+							word.topic
 						<svg [fill:$c min-width:16px] width="16" height="10" viewBox="0 0 8 5">
 							<title> 'expand'
 							<polygon points="4,3 1,0 0,1 4,5 8,1 7,0">
@@ -234,17 +304,38 @@ tag app
 			w:100%
 			m:8px auto 0
 			pb:128px
+		
+		header
+			pos:sticky top:2px zi:999 m:8px 0
+		
+		header button
+			bg:transparent
+			border:none
+			d:inline-block
+			fill:$c @hover:$accent-color
+			cursor:pointer
+			pos:absolute
+			h:100%
+
+		header svg
+			min-width:24px
+			h:100%
+
+		.disabled
+			opacity:0.5
+			cursor:not-allowed
+		
 
 		input
 			w:100%
 			d:block
-			p:8px 36px 8px 8px
-			m:8px 0
+			p:8px 36px 8px 68px
+			m:0
 			fs:1.5em
 			bg:$bg
 			c:$c
 			border:1px solid cooler8
-			shadow@focus: 0 0 256px 1px $accent-color, 0 0 0px 1px $accent-color, 0 0 128px 2px $accent-color
+			shadow@focus: 0 0 64px 1px $accent-color, 0 0 0px 1px $accent-color, 0 0 128px 2px $accent-color
 			rd@focus:8px
 
 			
@@ -258,7 +349,6 @@ tag app
 				m:0
 				p:12px 12px 12px 0
 				fs:1.2em
-				fw:bold
 				d:flex
 				jc:space-between
 				ai:center

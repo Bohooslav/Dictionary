@@ -9,5 +9,13 @@
     <body><!--$body$-->
         <!-- reference to the client script -->
         <script type="module" src='static/client.js'></script>
+        <script>
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister()
+                }
+            })
+        </script>
+	    <noscript>Unfortunately, this site requires JavaScript that is disabled in your browser :(</noscript>
     </body>
 </html>
