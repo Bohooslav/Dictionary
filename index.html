@@ -1,21 +1,44 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions</title>
-        <!-- reference to the client script styles -->
-        <link rel='stylesheet' href='static/client.css'>
-    </head>
-    <body><!--$body$-->
-        <!-- reference to the client script -->
-        <script type="module" src='static/client.js'></script>
-        <script>
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister()
-                }
-            })
-        </script>
-	    <noscript>Unfortunately, this site requires JavaScript that is disabled in your browser :(</noscript>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions
+    </title>
+    <!-- reference to the client script styles -->
+    <link rel="stylesheet" href="static/client.css" />
+    <meta
+      name="description"
+      content="Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
+    />
+    <meta
+      property="og:description"
+      content="Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions"
+    />
+    <meta property="og:title" content="Dictionary" />
+    <!-- <meta property="og:image" content="favicon.png" /> -->
+    <meta name="theme-color" content="#000" />
+    <meta name="twitter:card" content="app" />
+    <meta name="twitter:title" content="Dictionary" />
+    <!-- <meta name="twitter:image:src" content="favicon.png" /> -->
+    <meta name="twitter:image:alt" content="Dictionary logo" />
+  </head>
+
+  <body>
+    <!--$body$-->
+    <!-- reference to the client script -->
+    <script type="module" src="static/client.js"></script>
+    <script>
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    </script>
+    <noscript
+      >Unfortunately, this site requires JavaScript that is disabled in your
+      browser :(</noscript
+    >
+  </body>
 </html>
