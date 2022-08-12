@@ -1,7 +1,7 @@
-var APP_PREFIX = "DICTIONARY_v"; // Identifier for this app (this needs to be consistent across every cache update)
-var VERSION = "0.0.1"; // Version of the off-line cache (change this value everytime you want to update cache)
-var CACHE_NAME = APP_PREFIX + VERSION;
-var URLS = [
+let APP_PREFIX = "DICTIONARY_v"; // Identifier for this app (this needs to be consistent across every cache update)
+let VERSION = "0.0.2"; // Version of the off-line cache (change this value everytime you want to update cache)
+let CACHE_NAME = APP_PREFIX + VERSION;
+let URLS = [
   // Add URL you want to cache in this list.
   "/", // If you have separate JS/CSS files,
   "/index.html", // add path to those files here
@@ -51,7 +51,7 @@ self.addEventListener("activate", function (e) {
     caches.keys().then(function (keyList) {
       // `keyList` contains all cache names under your username.github.io
       // filter out ones that has this app prefix to create white list
-      var cacheWhitelist = keyList.filter(function (key) {
+      let cacheWhitelist = keyList.filter(function (key) {
         return key.indexOf(APP_PREFIX);
       });
       // add current cache name to white list
