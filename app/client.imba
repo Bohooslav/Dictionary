@@ -136,22 +136,6 @@ tag app
 			imba.commit!
 			return undefined
 
-		# document.onfocus = do
-		# 	if document.getSelection().toString().length == 0
-		# 		$search.focus!
-		# $search.focus!
-
-		
-		# log stripVowels 'יִשָּׁפֵךְ‎'
-		# log stripVowels 'יִשָּׁפֵך'
-
-
-		# let char = "\u0591"
-		# let accents = [char]
-		# while char != "\u05C7"
-		# 	char = String.fromCharCode(char.charCodeAt(0) + 1)
-		# 	accents.push(char)
-		# log accents
 
 	
 

@@ -499,7 +499,7 @@
   "imports": [],
   "exports": [],
   "inputs": [],
-  "bytes": 125106,
+  "bytes": 124587,
   "source": "$$54$$",
   "_": "output",
   "path": "public/__assets__/app/client.js.map",
@@ -651,7 +651,7 @@
   "js": "$$47$$"
 },
 "$$54$$":{
-  "bytes": 43856,
+  "bytes": 42843,
   "imports": [
     "$$69$$",
     "$$70$$",
