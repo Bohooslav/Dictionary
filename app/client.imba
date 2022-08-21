@@ -120,8 +120,15 @@ let definitions_history_index = -1
 let expanded_word = -1
 
 tag app
+	def setup
+		if (document.location.search)
+			let params = new URLSearchParams(document.location.search)
+			state.search = params.get("strong")
+			expanded_word = 0
+
 	def mount
 		let dict_lang = window.localStorage.getItem('dict_lang')
+
 		if dict_lang
 			state.dictionary_lang = dict_lang
 			imba.commit!
@@ -137,7 +144,8 @@ tag app
 			return undefined
 
 
-	
+	def unmount
+		window.strongDefinition = undefined
 
 
 	def stripVowels rawString
@@ -212,7 +220,7 @@ tag app
 			expanded_word = -1
 		else
 			expanded_word = index
-			setTimeout(&, 400) do
+			setTimeout(&, 500) do
 				const definition_body = document.getElementById(id)
 
 				if window.innerHeight > definition_body.scrollHeight + 100
@@ -237,6 +245,40 @@ tag app
 		definitions_history[definitions_history_index] = state.search
 		definitions_history.length = definitions_history_index + 1
 
+	def fallbackCopyTextToClipboard text
+		let textArea = document.createElement("textarea")
+		textArea.value = text
+		textArea.style.top = "0"
+		textArea.style.left = "0"
+		textArea.style.position = "fixed"
+
+		document.body.appendChild(textArea)
+		textArea.focus()
+		textArea.select()
+
+		try
+			let successful = document.execCommand('copy')
+			let msg = successful ? 'successful' : 'unsuccessful'
+			console.log('Fallback: Copying text command was ' + msg)
+		catch err
+			console.error('Fallback: Oops, unable to copy', err)
+
+		document.body.removeChild(textArea)
+
+	def copyTextToClipboard text
+		if !window.navigator.clipboard
+			fallbackCopyTextToClipboard(text)
+			return
+		window.navigator.clipboard.writeText(text).then(
+			do console.log('Async: Copying to clipboard was successful!')
+		).catch(do |err|
+			console.error('Async: Could not copy text: ', err)
+			fallbackCopyTextToClipboard(text)
+		)
+
+	def copyDefinition word
+		const link = document.location.origin + document.location.pathname + '?strong=' + word.topic
+		copyTextToClipboard("{word.lexeme} · {word.pronunciation} · {word.transliteration} · {word.short_definition} · {word.topic}\n\n{link}")
 
 	<self>
 		<main>
@@ -274,6 +316,8 @@ tag app
 							<b> word.short_definition
 							' · '
 							word.topic
+						<svg [fill:$c min-width:16px ml:auto mr:16px] width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 561 561" style="enable-background:new 0 0 561 561;" xml:space="preserve" @click.stop=copyDefinition(word)>
+							<path d="M395.25,0h-306c-28.05,0-51,22.95-51,51v357h51V51h306V0z M471.75,102h-280.5c-28.05,0-51,22.95-51,51v357 c0,28.05,22.95,51,51,51h280.5c28.05,0,51-22.95,51-51V153C522.75,124.95,499.8,102,471.75,102z M471.75,510h-280.5V153h280.5V510 z" >
 						<svg [fill:$c min-width:16px] width="16" height="10" viewBox="0 0 8 5">
 							<title> 'expand'
 							<polygon points="4,3 1,0 0,1 4,5 8,1 7,0">

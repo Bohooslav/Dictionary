@@ -407,7 +407,7 @@
   "public": true,
   "path": "public/__assets__/all.css",
   "asset": "$$45$$",
-  "hash": "VWX1JPHP",
+  "hash": "6GXGEQDB",
   "originalPath": "all.__dist__.css",
   "url": "/__assets__/all.css"
 },
@@ -499,7 +499,7 @@
   "imports": [],
   "exports": [],
   "inputs": [],
-  "bytes": 124587,
+  "bytes": 127839,
   "source": "$$54$$",
   "_": "output",
   "path": "public/__assets__/app/client.js.map",
@@ -507,7 +507,7 @@
   "url": "/__assets__/app/client.js.map",
   "type": "map",
   "dependencies": [],
-  "hash": "XECNXFPZ"
+  "hash": "IV6ENO2C"
 },
 "$$49$$":{
   "imports": [],
@@ -536,7 +536,7 @@
     ],
     [
       "$$60$$",
-      3866
+      3876
     ],
     [
       "$$61$$",
@@ -556,7 +556,7 @@
     ],
     [
       "$$65$$",
-      6013
+      6023
     ],
     [
       "$$66$$",
@@ -592,10 +592,10 @@
     ],
     [
       "$$54$$",
-      9344
+      11443
     ]
   ],
-  "bytes": 44704117,
+  "bytes": 44706236,
   "map": "$$48$$",
   "source": "$$54$$",
   "css": "$$50$$",
@@ -605,7 +605,7 @@
   "url": "/__assets__/app/client.js",
   "type": "js",
   "dependencies": [],
-  "hash": "XECNXFPZ",
+  "hash": "IV6ENO2C",
   "originalPath": "app/client.__dist__.js"
 },
 "$$50$$":{
@@ -613,10 +613,10 @@
   "inputs": [
     [
       "$$73$$",
-      3246
+      3341
     ]
   ],
-  "bytes": 3247,
+  "bytes": 3342,
   "source": "$$54$$",
   "_": "output",
   "path": "public/__assets__/app/client.css",
@@ -624,7 +624,7 @@
   "url": "/__assets__/app/client.css",
   "type": "css",
   "dependencies": [],
-  "hash": "NWDWLVXM",
+  "hash": "6DMQ9N31",
   "originalPath": "app/client.__dist__.css"
 },
 "$$51$$":{
@@ -651,7 +651,7 @@
   "js": "$$47$$"
 },
 "$$54$$":{
-  "bytes": 42843,
+  "bytes": 51113,
   "imports": [
     "$$69$$",
     "$$70$$",
@@ -811,7 +811,7 @@
   "path": "app/books_map.json"
 },
 "$$73$$":{
-  "bytes": 3596,
+  "bytes": 3702,
   "imports": [],
   "_": "input",
   "path": "styles:app/client.imba"
@@ -1120,7 +1120,7 @@
     "/__assets__/all.css": "$$45$$"
   },
   "mappings": {},
-  "hash": "GYJNHXK8",
+  "hash": "3NQ2MFTE",
   "srcdir": "..",
   "outdir": ".",
   "path": "server.js.manifest",

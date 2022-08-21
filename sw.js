@@ -1,12 +1,12 @@
 let APP_PREFIX = "DICTIONARY_v"; // Identifier for this app (this needs to be consistent across every cache update)
-let VERSION = "0.0.4"; // Version of the off-line cache (change this value everytime you want to update cache)
+let VERSION = "0.0.5"; // Version of the off-line cache (change this value everytime you want to update cache)
 let CACHE_NAME = APP_PREFIX + VERSION;
 let URLS = [
   // Add URL you want to cache in this list.
-  "/", // If you have separate JS/CSS files,
-  "/index.html", // add path to those files here
-  "/static/app/client.css",
-  "/static/app/client.js",
+  "/Dictionary/", // If you have separate JS/CSS files,
+  "/Dictionary/index.html", // add path to those files here
+  "/Dictionary/static/app/client.css",
+  "/Dictionary/static/app/client.js",
 ];
 
 // Respond with cached resources
